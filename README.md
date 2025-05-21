@@ -1,4 +1,4 @@
-# Resume Matcher Pro
+# Resume Analyzer
 
 A modern resume matching system that helps recruiters and hiring managers find the best candidates for their job openings. The application uses NLP techniques to analyze resumes and match them against job descriptions.
 
