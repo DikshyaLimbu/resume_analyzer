@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Resume Matcher - Results{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">
+                    <i class="fas fa-list me-2"></i>Matching Results
+                    <a href="{{ url_for('export_results') }}" class="btn btn-light btn-sm float-end">
+                        <i class="fas fa-download me-1"></i>Export Results
+                    </a>
+                </h4>
+            </div>
+            <div class="card-body">
+                <div class="mb-4">
+                    <h5>Job Description</h5>
+                    <div class="p-3 bg-light rounded">
+                        {{ job_description | default('No description provided.') }}
+                    </div>
+                </div>
+
+                <h5>Matched Resumes ({{ matches | length }})</h5>
+
+                {% for match in matches %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="mb-0">{{ match.filename | default('Unnamed Resume') }}</h5>
+                            <span class="badge bg-primary">
+                                Match Score: {{ "%.1f"|format((match.similarity or 0) * 100) }}%
+                            </span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6><i class="fas fa-tools me-2"></i>Skills</h6>
+                                <p class="text-muted">{{ match.skills | default('Not available') }}</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h6><i class="fas fa-briefcase me-2"></i>Experience</h6>
+                                <p class="text-muted">{{ match.experience | default('Not available') }}</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h6><i class="fas fa-graduation-cap me-2"></i>Education</h6>
+                                <p class="text-muted">{{ match.education | default('Not available') }}</p>
+                            </div>
+                        </div>
+
+                        <div class="progress mt-2" aria-label="Resume match progress">
+                            <div class="progress-bar" role="progressbar" 
+                                 data-progress="{{ (match.similarity or 0) * 100 }}"
+                                 aria-valuenow="{{ (match.similarity or 0) * 100 }}"
+                                 aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <p class="text-muted">No matching resumes found.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="d-flex justify-content-between">
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Back to Upload
+            </a>
+            <a href="{{ url_for('analytics') }}" class="btn btn-primary">
+                <i class="fas fa-chart-bar me-2"></i>View Analytics
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Set progress bar widths
+    document.querySelectorAll('.progress-bar').forEach(bar => {
+        const progress = bar.getAttribute('data-progress');
+        bar.style.width = progress + '%';
+    });
+</script>
+{% endblock %}

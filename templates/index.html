@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Resume Matcher - Home{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0"><i class="fas fa-upload me-2"></i>Upload Resumes</h4>
+            </div>
+            <div class="card-body">
+                <form action="{{ url_for('upload_files') }}" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label class="form-label">Select PDF Resumes</label>
+                        <input type="file" class="form-control" name="resumes" multiple accept=".pdf" required>
+                        <small class="text-muted">You can select multiple PDF files</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-cloud-upload-alt me-2"></i>Upload Resumes
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0"><i class="fas fa-search me-2"></i>Match Resumes</h4>
+            </div>
+            <div class="card-body">
+                <form action="{{ url_for('match_resumes') }}" method="post">
+                    <div class="mb-3">
+                        <label class="form-label">Job Description</label>
+                        <textarea class="form-control" name="job_description" rows="6" required 
+                                placeholder="Paste the job description here..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-magic me-2"></i>Find Matches
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0"><i class="fas fa-info-circle me-2"></i>Quick Guide</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="text-center mb-3">
+                            <i class="fas fa-upload fa-3x text-primary mb-3"></i>
+                            <h5>1. Upload Resumes</h5>
+                            <p>Start by uploading one or more PDF resumes</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center mb-3">
+                            <i class="fas fa-file-alt fa-3x text-primary mb-3"></i>
+                            <h5>2. Add Job Description</h5>
+                            <p>Paste the job description you want to match against</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center mb-3">
+                            <i class="fas fa-check-circle fa-3x text-primary mb-3"></i>
+                            <h5>3. Get Results</h5>
+                            <p>View matched resumes ranked by relevance</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Add file upload preview
+    document.querySelector('input[type="file"]').addEventListener('change', function(e) {
+        const fileCount = e.target.files.length;
+        const small = document.querySelector('small.text-muted');
+        small.textContent = `${fileCount} file(s) selected`;
+    });
+</script>
+{% endblock %}

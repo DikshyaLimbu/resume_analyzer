@@ -1,0 +1,46 @@
+# Core dependencies
+numpy>=2.2.0
+pandas>=2.2.0
+scikit-learn>=1.6.0
+
+# PDF Processing
+PyMuPDF>=1.25.0
+pdfplumber>=0.10.0
+pdfminer.six>=20221105
+PyPDF2>=3.0.0
+
+# NLP Libraries (no compilation required)
+nltk>=3.8.0
+textblob>=0.17.1
+
+# Web UI
+Flask>=2.0.0
+Werkzeug>=2.0.0
+plotly>=5.3.0
+
+# Data Export
+openpyxl>=3.0.7
+xlrd>=2.0.1
+
+# Additional dependencies
+setuptools>=68.0.0
+wheel>=0.40.0
+pip>=23.0.0
+cachetools>=5.5.2
+certifi>=2023.7.22
+charset-normalizer>=3.0.0
+click>=8.0.0
+colorama>=0.4.6
+docx2txt>=0.8
+filelock>=3.0.0
+Jinja2>=3.0.0
+joblib>=1.0.0
+MarkupSafe>=2.0.0
+packaging>=23.0
+Pillow>=10.0.0
+python-dateutil>=2.8.2
+PyYAML>=6.0.0
+requests>=2.31.0
+six>=1.16.0
+tqdm>=4.65.0
+urllib3>=2.0.0
