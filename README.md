@@ -12,10 +12,15 @@ A modern resume matching system that helps recruiters and hiring managers find t
 - Ensures fallback reliability when parsing various PDF formats
 
 ### 2. Resume Section Parsing
-- Regex-based parser extracts key sections:
-  - Skills
-  - Experience
+- Regex-based parser extracts:
+  - Email
+  - Phone
+- skillNer extracts:
+  - skills
+- SBERT extracts key sections:
   - Education
+  - Experience
+  - Profile
 - These sections are used for both display and context-aware matching
 
 ### 3. Data Cleaning and Preprocessing
@@ -34,7 +39,7 @@ A modern resume matching system that helps recruiters and hiring managers find t
 
 ### 5. Job Description Matching
 - Implementation includes:
-  - Text-based similarity comparison
+  - Text-based similarity comparison using SBERT
   - Section-specific analysis
   - Ranked list of best-fit resumes
 
@@ -69,7 +74,6 @@ Model_and_Interface/
 1. Clone the repository:
 ```bash
 git clone <repository-url>
-cd Model_and_Interface
 ```
 
 2. Install core dependencies:
@@ -101,6 +105,11 @@ pip install Flask Werkzeug plotly
 6. Install data processing libraries:
 ```bash
 pip install numpy pandas scikit-learn openpyxl xlrd
+```
+
+7. Install model packages:
+```bash
+pip install sentence-transformer
 ```
 
 ### Directory Setup
